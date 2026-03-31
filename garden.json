@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "garden": {
+      "command": "node",
+      "args": ["dist/index.js"]
+    }
+  }
+}

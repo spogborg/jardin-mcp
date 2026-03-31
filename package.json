@@ -1,0 +1,29 @@
+{
+  "name": "jardin-mcp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "build": "tsc",
+  "dev": "ts-node src/index.ts",
+  "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spogborg/jardin-mcp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/spogborg/jardin-mcp/issues"
+  },
+  "homepage": "https://github.com/spogborg/jardin-mcp#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.2"
+  }
+}
