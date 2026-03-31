@@ -1,6 +1,12 @@
 import { Tool } from "@modelcontextprotocol/sdk/types.js";
 import { plantDB } from "../database.js";
 
+// Add this helper at the top of every tools file, just below the imports
+function safeText(obj: unknown): string {
+  const text = JSON.stringify(obj, null, 2);
+  return text && text.trim().length > 0 ? text : "{}";
+}
+
 export const plantTools: Tool[] = [
   {
     name: "plant_add",

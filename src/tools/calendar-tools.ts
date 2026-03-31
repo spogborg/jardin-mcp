@@ -2,6 +2,12 @@ import { Tool } from "@modelcontextprotocol/sdk/types.js";
 import { exec } from "child_process";
 import { promisify } from "util";
 
+// Add this helper at the top of every tools file, just below the imports
+function safeText(obj: unknown): string {
+  const text = JSON.stringify(obj, null, 2);
+  return text && text.trim().length > 0 ? text : "{}";
+}
+
 const execAsync = promisify(exec);
 
 export const calendarTools: Tool[] = [
@@ -46,18 +52,23 @@ export async function handleCalendarTool(
       duration: number; notes: string;
     };
 
+    // Parse date/time components for locale-safe AppleScript date construction
+    const [year, month, day] = date.split("-").map(Number);
+    const [hour, minute] = time.split(":").map(Number);
+    const safeNotes = notes.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+
     // AppleScript — talks directly to Calendar.app, no API needed
     const script = `
       tell application "Calendar"
         tell calendar "Home"
-          set startDate to date "${date} ${time}:00"
+          set startDate to current date
+          set year of startDate to ${year}
+          set month of startDate to ${month}
+          set day of startDate to ${day}
+          set time of startDate to (${hour} * hours) + (${minute} * minutes)
           set endDate to startDate + (${duration} * minutes)
-          make new event with properties {
-            summary: "${title}",
-            start date: startDate,
-            end date: endDate,
-            description: "${notes.replace(/"/g, '\\"').replace(/\n/g, '\\n')}"
-          }
+          set theEvent to make new event at end with properties {summary:"${title}", start date:startDate, end date:endDate}
+          set description of theEvent to "${safeNotes}"
         end tell
       end tell
       return "added"
@@ -68,7 +79,7 @@ export async function handleCalendarTool(
       return {
         content: [{
           type: "text",
-          text: JSON.stringify({
+          text: safeText({
             status: "added",
             message: `✓ "${title}" added to Apple Calendar on ${date} at ${time}`
           })
@@ -78,7 +89,7 @@ export async function handleCalendarTool(
       return {
         content: [{
           type: "text",
-          text: JSON.stringify({
+          text: safeText({
             status: "error",
             message: `Calendar write failed. Make sure Calendar.app has automation permissions in System Settings → Privacy → Automation.`,
             error: String(err)
@@ -93,14 +104,19 @@ export async function handleCalendarTool(
       title: string; due_date: string; notes: string;
     };
 
+    const [ry, rm, rd] = due_date.split("-").map(Number);
+    const safeNotesR = notes.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+
     const script = `
       tell application "Reminders"
         tell list "Reminders"
-          make new reminder with properties {
-            name: "${title}",
-            due date: date "${due_date}",
-            body: "${notes.replace(/"/g, '\\"').replace(/\n/g, '\\n')}"
-          }
+          set dueDate to current date
+          set year of dueDate to ${ry}
+          set month of dueDate to ${rm}
+          set day of dueDate to ${rd}
+          set time of dueDate to 9 * hours
+          set theReminder to make new reminder at end with properties {name:"${title}", due date:dueDate}
+          set body of theReminder to "${safeNotesR}"
         end tell
       end tell
       return "added"
@@ -111,7 +127,7 @@ export async function handleCalendarTool(
       return {
         content: [{
           type: "text",
-          text: JSON.stringify({
+          text: safeText({
             status: "added",
             message: `✓ "${title}" added to Apple Reminders for ${due_date}`
           })
@@ -121,7 +137,7 @@ export async function handleCalendarTool(
       return {
         content: [{
           type: "text",
-          text: JSON.stringify({
+          text: safeText({
             status: "error",
             message: `Reminders write failed. Make sure Reminders.app has automation permissions in System Settings → Privacy → Automation.`,
             error: String(err)
