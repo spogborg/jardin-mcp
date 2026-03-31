@@ -6,7 +6,7 @@ import { batchTools, handleBatchTool } from "./tools/batch-tools.js";
 import { calendarTools, handleCalendarTool } from "./tools/calendar-tools.js";
 
 const server = new Server(
-  { name: "garden-mcp", version: "1.0.0" },
+  { name: "jardinning", version: "1.0.0" },
   { capabilities: { tools: {} } }
 );
 
@@ -30,7 +30,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("Garden MCP server running — tools: plants, batch, calendar, reminders");
+  console.error("Jardinning MCP server running — tools: plants, batch, calendar, reminders");
 }
 
 main().catch(console.error);

@@ -1,4 +1,4 @@
-# Garden MCP — Project Context
+# Jardinning — Project Context
 
 ## What this project is
 A personal garden management tool built on Claude Code + MCP.

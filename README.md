@@ -1,7 +1,7 @@
 > 🔒 Personal project — clone freely, PRs not accepted.
 > Built with Claude Code as a learning project.
 
-# 🌿 jardin-mcp
+# 🌿 Jardinning
 
 A personal garden management tool built on Claude Code and MCP. Track your plants, log what you notice, and keep care schedules grounded in what's actually happening in your garden — all from your terminal. Claude is the intelligence; this server handles the data.
 
@@ -17,8 +17,8 @@ A personal garden management tool built on Claude Code and MCP. Track your plant
 
 ### 1. Clone and build
 ```bash
-git clone https://github.com/YOUR_USERNAME/garden-mcp.git
-cd garden-mcp
+git clone https://github.com/YOUR_USERNAME/jardinning.git
+cd jardinning
 npm install
 npm run build
 ```
@@ -36,7 +36,7 @@ Paste this into it — replacing the path with your actual absolute path:
   "mcpServers": {
     "garden": {
       "command": "node",
-      "args": ["/Users/YOUR_USERNAME/garden-mcp/dist/index.js"]
+      "args": ["/Users/YOUR_USERNAME/jardinning/dist/index.js"]
     }
   }
 }
@@ -44,7 +44,7 @@ Paste this into it — replacing the path with your actual absolute path:
 
 To find your exact path:
 ```bash
-cd garden-mcp && pwd
+cd jardinning && pwd
 # copy the output and append /dist/index.js
 ```
 

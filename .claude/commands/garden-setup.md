@@ -1,6 +1,6 @@
 # Garden Setup
 
-Welcome to garden-mcp. Run this once to get started.
+Welcome to Jardinning. Run this once to get started.
 
 ## Steps
 
@@ -21,7 +21,7 @@ Welcome to garden-mcp. Run this once to get started.
 
 Show this first:
 ```
-🌿 Welcome to garden-mcp
+🌿 Welcome to Jardinning
 
 Your personal garden manager — powered by Claude Code.
 No subscriptions. No app. Just your terminal and your plants.
