@@ -167,6 +167,20 @@ Claude Code is the brain. The MCP server is pure data + system integration. No e
 - [ ] **Zip code planting calendar** — vegetable garden recommendations by region and season (e.g. Pacific Northwest planting windows, last frost dates, succession planting)
 - [ ] **Slack integration** — push weekly garden session plan directly to a Slack channel or DM
 
+## What I learned
+
+Built this to get hands-on with agentic AI — not just read about it.
+
+**Give the model one job.** The instinct is to let Claude do everything. The better design is to keep data persistence and integrations as dumb, reliable tools. The MCP server doesn't think. Claude does.
+
+**Weight matters.** Early versions used native compiled modules and external API calls. Swapped it all for a JSON file and let Claude Code be the intelligence layer. Same output, much less complexity.
+
+**Know what not to build.** Dropped the React UI, the mobile PWA, the cron scheduler — not because they were hard, but because they were wrong for a personal terminal tool. That call is the same skill whether you're writing a side project or managing a roadmap.
+
+**Data outlives the conversation.** Without persistent plant history, every session starts cold. The feedback loop — log what you notice, adjust care based on real outcomes — only works because the data survives between sessions. That applies to any agentic system.
+
+**CLAUDE.md is underrated.** Treating the project brief as a first-class artifact made every session consistent without re-explaining context. The equivalent in product work is a well-written PRD that the team actually reads.
+
 ## Requirements
 - Mac (AppleScript for Calendar/Reminders)
 - Claude Code
