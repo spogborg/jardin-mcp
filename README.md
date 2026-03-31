@@ -3,11 +3,13 @@
 
 # 🌿 jardin-mcp
 
-An MCP (Model Context Protocol) server for plant identification and garden task management — built to run with Claude Code. No extra API costs. Claude Code is the intelligence layer; this server handles data and system integrations.
+A personal garden management tool built on Claude Code and MCP. Track your plants, log what you notice, and keep care schedules grounded in what's actually happening in your garden — all from your terminal. Claude is the intelligence; this server handles the data.
 
 ## What it does
-- Add plants by name → Claude generates full care profile → saved to local JSON
-- List your garden roster with watering, feeding, pruning schedules
+- Add plants by name → Claude generates a full care profile → saved to local JSON
+- Log observations as you go — yellowing leaves, pests, new growth, anything you notice
+- Claude diagnoses, suggests care adjustments, and updates the schedule when you confirm
+- Full history per plant — every observation and care change is saved
 - Batch all care tasks into optimized garden sessions to save time
 - Push sessions directly to Apple Calendar or Apple Reminders via AppleScript
 
