@@ -1,3 +1,6 @@
+> 🔒 Personal project — clone freely, PRs not accepted.
+> Built with Claude Code as a learning project.
+
 # 🌿 jardin-mcp
 
 An MCP (Model Context Protocol) server for plant identification and garden task management — built to run with Claude Code. No extra API costs. Claude Code is the intelligence layer; this server handles data and system integrations.
