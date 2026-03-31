@@ -10,28 +10,50 @@ An MCP (Model Context Protocol) server for plant identification and garden task 
 
 ## Usage
 
-Clone and build:
+### 1. Clone and build
 ```bash
+git clone https://github.com/YOUR_USERNAME/garden-mcp.git
+cd garden-mcp
 npm install
 npm run build
 ```
 
-Add to your Claude Code MCP config:
+### 2. Create your MCP config file
+
+Create a file called `garden.json` anywhere on your machine — your home folder is fine:
+```bash
+touch ~/garden.json
+```
+
+Paste this into it — replacing the path with your actual absolute path:
 ```json
 {
   "mcpServers": {
     "garden": {
       "command": "node",
-      "args": ["/path/to/garden-mcp/dist/index.js"]
+      "args": ["/Users/YOUR_USERNAME/garden-mcp/dist/index.js"]
     }
   }
 }
 ```
 
-Start Claude Code:
+To find your exact path:
 ```bash
-claude --mcp-config garden.json
+cd garden-mcp && pwd
+# copy the output and append /dist/index.js
 ```
+
+### 3. Start Claude Code
+```bash
+claude --mcp-config ~/garden.json
+```
+
+### 4. Run setup
+```
+/garden-setup
+```
+
+That's it. Claude walks you through adding your first plants.
 
 ## Example commands
 ```
@@ -53,6 +75,40 @@ add garden tasks to my reminders for Saturday
 | `task_batch` | Generate optimized session plan from all plants |
 | `calendar_add` | Add session to Apple Calendar via AppleScript |
 | `reminder_add` | Add tasks to Apple Reminders via AppleScript |
+
+## Slash Commands
+
+Once connected in Claude Code, these commands are available to anyone:
+
+| Command | What it does |
+|---|---|
+| `/garden-setup` | First-time setup walkthrough |
+| `/garden-week` | Preview this week's tasks — no Calendar push |
+| `/garden-batch` | Batch tasks + push to Apple Calendar and Reminders |
+
+### How to use
+
+Start Claude Code with the MCP config:
+```bash
+claude --mcp-config garden.json
+```
+
+Then just type the command:
+```
+/garden-batch
+```
+
+Claude handles the rest — reads your plants, groups the tasks,
+pushes to your Calendar and Reminders automatically.
+
+## Automation
+
+The slash commands replace cron — run `/garden-batch` whenever
+you want, or ask Claude to remind you:
+```
+every time I start a Claude Code session, run /garden-week so 
+I can see what needs doing in my garden this week
+```
 
 ## Architecture
 ```
