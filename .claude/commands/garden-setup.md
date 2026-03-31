@@ -13,6 +13,9 @@ Welcome to garden-mcp. Run this once to get started.
 4. Save their preferences by calling `plant_add` for any plants they want
    to add right now — offer to add 2-3 to get started
 5. Suggest running `/garden-week` to see their first plan
+6. Let them know they can log observations at any time:
+   "If you notice anything about a plant — yellowing, pests, new growth —
+   just tell me and I'll log it and adjust the care plan if needed."
 
 ## Welcome message
 
