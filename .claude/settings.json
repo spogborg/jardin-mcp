@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo 'Run /garden-week to see this week\\'s garden tasks. Run /garden-batch to push to Calendar + Reminders.'"
+            "command": "echo '🌿 Garden tools ready. Run /garden-week to preview tasks or /garden-batch to push to Calendar + Reminders.'"
           }
         ]
       }

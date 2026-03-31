@@ -47,7 +47,45 @@ export const plantTools: Tool[] = [
       },
       required: ["id"]
     }
+  },
+  {
+  name: "plant_observe",
+  description: "Log an observation against a plant — symptoms, issues, changes noticed. Use when the user mentions anything they have seen or noticed about a plant.",
+  inputSchema: {
+    type: "object",
+    properties: {
+      plant_id:  { type: "number", description: "Plant id from plant_list" },
+      note:      { type: "string", description: "What was observed e.g. 'yellowing lower leaves, soil was very dry'" },
+      severity:  { type: "string", description: "info / warning / critical" }
+    },
+    required: ["plant_id", "note", "severity"]
   }
+},
+{
+  name: "plant_update_care",
+  description: "Update a specific field in a plant's care profile based on observed results. Use when the user wants to adjust watering, feeding or other care based on what they are seeing.",
+  inputSchema: {
+    type: "object",
+    properties: {
+      plant_id: { type: "number", description: "Plant id from plant_list" },
+      field:    { type: "string", description: "Care profile field to update: watering / sunlight / feeding / pruning / seasonal_notes" },
+      value:    { type: "string", description: "New value for the field" },
+      reason:   { type: "string", description: "Why this change is being made e.g. 'user observed root rot, reducing watering frequency'" }
+    },
+    required: ["plant_id", "field", "value", "reason"]
+  }
+},
+{
+  name: "plant_history",
+  description: "Show the full observation and care change history for a plant",
+  inputSchema: {
+    type: "object",
+    properties: {
+      plant_id: { type: "number", description: "Plant id from plant_list" }
+    },
+    required: ["plant_id"]
+  }
+}
 ];
 
 export async function handlePlantTool(
@@ -108,6 +146,57 @@ export async function handlePlantTool(
       }]
     };
   }
+
+  if (toolName === "plant_observe") {
+  const count = await plantDB.observe(
+    args.plant_id as number,
+    args.note as string,
+    args.severity as string
+  );
+  return {
+    content: [{
+      type: "text",
+      text: safeText({
+        status: "logged",
+        observation_count: count,
+        message: `Observation logged`
+      })
+    }]
+  };
+}
+
+if (toolName === "plant_update_care") {
+  await plantDB.updateCareProfile(
+    args.plant_id as number,
+    args.field as string,
+    args.value as string,
+    args.reason as string
+  );
+  return {
+    content: [{
+      type: "text",
+      text: safeText({
+        status: "updated",
+        field: args.field,
+        new_value: args.value,
+        message: `Care profile updated — previous value saved to history`
+      })
+    }]
+  };
+}
+
+if (toolName === "plant_history") {
+  const history = await plantDB.getHistory(args.plant_id as number);
+  return {
+    content: [{
+      type: "text",
+      text: safeText({
+        status: "ok",
+        ...history
+      })
+    }]
+  };
+}
 
   throw new Error(`Unhandled tool: ${toolName}`);
 }

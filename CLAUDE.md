@@ -64,6 +64,36 @@ When a user adds a plant, Claude should:
 - `/garden-week` — preview this week's tasks
 - `/garden-batch` — batch tasks and push to Calendar + Reminders
 
+## Feedback and observation handling
+
+When the user mentions ANYTHING they have noticed about a plant — 
+symptoms, changes, problems, improvements — always:
+
+1. Call `plant_list` first to find the plant_id by name
+2. Call `plant_observe` immediately to log the raw observation
+3. Diagnose the likely cause from your knowledge
+4. Suggest what care adjustment (if any) would help
+5. Ask: "Should I update your care schedule to reflect this?"
+6. If yes, call `plant_update_care` with the specific field and new value
+
+### Severity guidelines
+- info     — normal change, no action needed e.g. "new growth appearing"
+- warning  — needs attention e.g. "yellowing leaves, possible overwatering"
+- critical — urgent e.g. "white powdery mildew spreading, pest infestation"
+
+### Care update triggers
+Update the care profile when the user confirms, or when the observation
+clearly indicates the current schedule is wrong:
+- "overwatering" / "root rot" → reduce watering frequency
+- "wilting between waterings" → increase watering frequency  
+- "leggy growth" / "pale leaves" → increase sunlight
+- "scorched leaves" → reduce direct sun
+- "slow growth" → check feeding schedule
+
+Always show what changed:
+"Updated watering from [old] → [new] because [reason]"
+Always confirm the previous value is saved to history.
+
 ## Output style
 - Be concise and action-oriented
 - Use emoji sparingly: 🌿 💧 🌱 ✂️ only
