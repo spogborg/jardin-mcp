@@ -72,9 +72,36 @@ add garden tasks to my reminders for Saturday
 | `plant_add` | Save a plant + care profile to roster |
 | `plant_list` | List all plants with care info |
 | `plant_remove` | Remove a plant by id |
+| `plant_observe` | Log an observation against a plant (symptoms, changes, issues) |
+| `plant_update_care` | Update a care profile field — previous value saved to history |
+| `plant_history` | Show full observation and care change history for a plant |
 | `task_batch` | Generate optimized session plan from all plants |
 | `calendar_add` | Add session to Apple Calendar via AppleScript |
 | `reminder_add` | Add tasks to Apple Reminders via AppleScript |
+
+### Observations and care updates
+
+Just describe what you see — Claude logs it and adjusts care if needed:
+
+```
+my lavender looks a bit yellow at the base
+the tomato is wilting between waterings
+white powder on the rose leaves
+new growth on the pothos looking good
+```
+
+Claude will:
+1. Log the observation with a severity (`info` / `warning` / `critical`)
+2. Diagnose the likely cause from its knowledge
+3. Suggest a care adjustment if one is needed
+4. Ask whether to update the care schedule
+5. Save the previous value to history before changing anything
+
+To review a plant's history:
+```
+show me the history for my lavender
+what observations have I logged for the tomato
+```
 
 ## Slash Commands
 
@@ -120,9 +147,10 @@ You (Claude Code) → MCP tools → garden.json (local data)
 Claude Code is the brain. The MCP server is pure data + system integration. No external APIs, no cost beyond your Claude Code subscription.
 
 ## Status
-✅ Phase 1 — MCP scaffold  
-✅ Phase 2 — Plant roster with JSON persistence  
-✅ Phase 3 — Task batching + Calendar/Reminders push  
+✅ Phase 1 — MCP scaffold
+✅ Phase 2 — Plant roster with JSON persistence
+✅ Phase 3 — Task batching + Calendar/Reminders push
+✅ Phase 4 — Observations, care history, adaptive care updates
 
 ## Roadmap
 
