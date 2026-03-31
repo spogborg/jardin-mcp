@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "build": "tsc",
-  "dev": "ts-node src/index.ts",
-  "start": "node dist/index.js"
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,15 +15,17 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/spogborg/jardin-mcp/issues"
   },
   "homepage": "https://github.com/spogborg/jardin-mcp#readme",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.29.0"
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "lowdb": "^7.0.1"
   },
   "devDependencies": {
+    "@types/node": "^25.5.0",
     "typescript": "^6.0.2"
   }
 }
