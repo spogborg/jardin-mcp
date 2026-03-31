@@ -34,12 +34,13 @@ add a tomato plant growing outdoors
 ```
 
 ## Status
-🚧 Active development — Phase 1 complete (MCP scaffold + tool definitions)
+🚧 Active development
 
-## Roadmap
+## What works now
 - [x] MCP server scaffold
-- [x] Plant identify, add, list tools
-- [ ] Claude Vision plant ID from photo
-- [ ] SQLite garden roster with persistence
+- [x] Plant identify, add, list, remove tools
+- [x] JSON file database — no external DB needed
+- [x] Claude Code is the intelligence layer — no extra API cost
 - [ ] Care schedule generation
-- [ ] Calendar + Reminders batching
+- [ ] Task batching
+- [ ] Calendar + Reminders integration
